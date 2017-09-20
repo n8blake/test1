@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Welcome to Firebase Hosting</title>
-
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/4.2.0/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
@@ -12,6 +12,7 @@
     <script defer src="/__/firebase/4.2.0/firebase-database.js"></script>
     <script defer src="/__/firebase/4.2.0/firebase-messaging.js"></script>
     <script defer src="/__/firebase/4.2.0/firebase-storage.js"></script>
+    <script defer src="fb_test.js"></script>
     <!-- initialize the SDK after all desired features are loaded -->
     <!--<script defer src="/__/firebase/init.js"></script>-->
 
@@ -34,6 +35,7 @@
     <div id="message">
       <h2 id="myWelcome"></h2>
       <h3 id="userInfo"></h3>
+    </div>
       <!--<h2>Welcome</h2>
       <h1>Firebase Hosting Setup Complete</h1>
       <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
@@ -84,9 +86,18 @@
           // The signed-in user info.
           var user = result.user;
           // ...
-          console.log(user);
+          //console.log(user);
+          if(user){
+            document.getElementById('userInfo').innerHTML = '<i class="fa fa-check-circle" aria-hidden="true"></i>' + user.providerData[0].displayName;
+          } else {
 
-          document.getElementById('userInfo').innerHTML = user.providerData[0].displayName;
+            document.getElementById('userInfo').innerHTML = '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> User not authenticated!';
+
+          }
+          
+
+
+
 
         }).catch(function(error) {
           // Handle Errors here.
@@ -97,6 +108,9 @@
           // The firebase.auth.AuthCredential type that was used.
           var credential = error.credential;
           // ...
+
+          document.getElementById('userInfo').innerHTML = '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> User not authenticated!' + email;
+
         });
 
 
